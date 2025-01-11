@@ -23,10 +23,10 @@ Before you begin, ensure you have the following installed:
 
 ## Database Setup
 
-1. In Laragon, click the "Database" button to open HeidiSQL.
+1. In Laragon, click the "Database" button to open MySQL.
 2. Right-click on the left sidebar and choose "Create new > Database".
-3. Name the database `joke_generator` and click "OK".
-4. With the `joke_generator` database selected, click on the "Query" tab and paste the following SQL:
+3. Name the database `joke_db` and click "OK".
+4. With the `joke_db` database selected, click on the "Query" tab and paste the following SQL:
 
    ```sql
    CREATE TABLE favorites (
@@ -37,7 +37,7 @@ Before you begin, ensure you have the following installed:
    );
    ```
 
-5. Click the "Run" button (blue play icon) to create the table.
+5. Click the "Run" button to create the table.
 
 ## Configuration
 
@@ -45,7 +45,7 @@ Update the database connection details in `save_favorite.php`:
 
 ```php
 $host = 'localhost';
-$dbname = 'joke_generator';
+$dbname = 'joke_db';
 $username = 'root';
 $password = '';  // Your MySQL password 
 ```
@@ -54,7 +54,7 @@ $password = '';  // Your MySQL password
 
 1. Ensure Laragon is running with Apache and MySQL services started.
 2. In Laragon, click the "Web" button (or visit http://localhost).
-3. Click on the "joke-generator" project link.
+3. Click on the "get-joke" project link.
 4. Use the search bar to find jokes or click "Get Joke" without a search term for random jokes.
 5. Click the heart icon on a joke card to save it as a favorite.
 
@@ -62,7 +62,5 @@ $password = '';  // Your MySQL password
 
 - If you make changes to the PHP file, you might need to restart the Apache server in Laragon (click "Stop" then "Start All").
 - If you encounter database connection issues, double-check the connection details in `save_favorite.php`.
-- Ensure that the `joke_generator` database and `favorites` table are created correctly.
+- Ensure that the `get-joke` database and `favorites` table are created correctly.
 - Check Laragon's error logs if you experience any issues with the server or PHP execution.
-
-For any other issues or questions, please refer to the [Laragon documentation](https://laragon.org/docs/) or create an issue in this project's repository.
