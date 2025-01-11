@@ -13,3 +13,16 @@
     top: 10px;
     right: 10px;
 }
+
+.favorite-joke {
+    position: relative;
+    height: 100%;
+}
+
+.favorite-date {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    font-size: 0.8em;
+    color: #6c757d;
+}

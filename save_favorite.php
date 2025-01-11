@@ -14,6 +14,11 @@ try {
     // Get the joke data from the request
     $joke = json_decode(file_get_contents('php://input'), true);
 
+    // Validate joke data
+    if (!isset($joke['id']) || !isset($joke['joke'])) {
+        throw new Exception('Invalid joke data');
+    }
+
     // Insert the joke into the database
     $stmt = $pdo->prepare("INSERT INTO favorites (joke_id, joke_text) VALUES (:joke_id, :joke_text)");
     $stmt->execute([
@@ -22,6 +27,6 @@ try {
     ]);
 
     echo json_encode(['success' => true]);
-} catch (PDOException $e) {
+} catch (Exception $e) {
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }

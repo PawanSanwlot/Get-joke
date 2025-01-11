@@ -69,15 +69,18 @@ async function favoriteJoke(joke) {
             },
             body: JSON.stringify(joke),
         });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const result = await response.json();
         if (result.success) {
             alert('Joke added to favorites!');
         } else {
-            alert('Error adding joke to favorites. Please try again.');
+            throw new Error(result.error || 'Unknown error occurred');
         }
     } catch (error) {
         console.error('Error saving favorite:', error);
-        alert('Error adding joke to favorites. Please try again.');
+        alert(`Error adding joke to favorites: ${error.message}`);
     }
 }
 
