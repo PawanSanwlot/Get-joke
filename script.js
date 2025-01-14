@@ -114,7 +114,7 @@ async function favoriteJoke(joke) {
         }
     } catch (error) {
         console.error('Error saving favorite:', error);
-        alert('Failed to save joke to favorites.');
+        alert('Database not detected.');
     }
 }
 
