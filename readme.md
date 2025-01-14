@@ -64,3 +64,12 @@ $password = '';  // Your MySQL password
 - If you encounter database connection issues, double-check the connection details in `save_favorite.php`.
 - Ensure that the `get-joke` database and `favorites` table are created correctly.
 - Check Laragon's error logs if you experience any issues with the server or PHP execution.
+
+   <!-- <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <a className="text-xs hover:underline underline-offset-4" href="#">
+            Terms of Service
+          </a>
+          <a className="text-xs hover:underline underline-offset-4" href="#">
+            Privacy
+          </a>
+        </nav> -->

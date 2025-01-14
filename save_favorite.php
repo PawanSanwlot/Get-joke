@@ -11,22 +11,20 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Get the joke data from the request
-    $joke = json_decode(file_get_contents('php://input'), true);
+    // Decode the incoming JSON data
+    $data = json_decode(file_get_contents('php://input'), true);
+    $jokeId = $data['id'] ?? null; // Extract 'id' from JSON
+    $jokeText = $data['joke_text'] ?? ''; // Extract 'joke_text' from JSON
 
-    // Validate joke data
-    if (!isset($joke['id']) || !isset($joke['joke'])) {
-        throw new Exception('Invalid joke data');
+    if ($jokeId && $jokeText) {
+        // Insert data into the 'favorites' table
+        $stmt = $pdo->prepare("INSERT INTO favorites (joke_id, joke_text) VALUES (?, ?)");
+        $stmt->execute([$jokeId, $jokeText]);
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'error' => 'Invalid joke data.']);
     }
-
-    // Insert the joke into the database
-    $stmt = $pdo->prepare("INSERT INTO favorites (joke_id, joke_text) VALUES (:joke_id, :joke_text)");
-    $stmt->execute([
-        ':joke_id' => $joke['id'],
-        ':joke_text' => $joke['joke']
-    ]);
-
-    echo json_encode(['success' => true]);
-} catch (Exception $e) {
+} catch (PDOException $e) {
     echo json_encode(['success' => false, 'error' => $e->getMessage()]);
 }
+?>

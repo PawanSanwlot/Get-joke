@@ -1,8 +1,4 @@
 <?php
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 header('Content-Type: application/json');
 
 // Database connection details
@@ -15,11 +11,15 @@ try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $username, $password);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    // Fetch favorites from the database
-    $stmt = $pdo->query("SELECT id, joke_id, joke_text, created_at FROM favorites ORDER BY created_at DESC");
-    $favorites = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $stmt = $pdo->prepare("DELETE FROM favorites");
+        $stmt->execute();
 
-    echo json_encode($favorites);
+        echo json_encode(['success' => true, 'message' => 'All favorites have been deleted.']);
+    } else {
+        echo json_encode(['error' => 'Invalid request method.']);
+        http_response_code(405); // Method Not Allowed
+    }
 } catch (PDOException $e) {
     echo json_encode(['error' => $e->getMessage()]);
     http_response_code(500); // Internal Server Error

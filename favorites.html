@@ -10,9 +10,13 @@
 <body>
     <div class="container mt-5">
         <h1 class="text-center mb-4">Favorite Jokes</h1>
-        <a href="index.html" class="btn btn-primary mb-4">Back to Joke Generator</a>
+        <a href="index.html" id="backbtn" class="btn btn-primary mb-4">Back to Joke Generator</a>
+        <button id="deleteAll" class="btn btn-danger mb-4">Delete History</button>
         <div id="favoritesContainer" class="row"></div>
     </div>
+    <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+        <p className="text-xs text-gray-500 dark:text-gray-400">© 2025 JokeEngine. All rights reserved. Pavan Sanwlot.</p>
+      </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="favorites.js"></script>
 </body>
